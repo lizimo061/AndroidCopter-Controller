@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RMBAC</string>
+    
+    <!-- Login -->
+    <string name="welcome">Welcome to Controller</string>
+    <string name="ip">IP :</string>
+    <string name="port">Port :</string>
+    <string name="username">Username :</string>
+    <string name="password">Password :</string>
+    <string name="login">Login</string>
+    
+    <!-- MainMenu -->
+     <string name="menu">Menu</string>
+     <string name="start">Start Monitoring</string>
+     <string name="setting">Setting</string>
+     <string name="help">Help</string>
+     
+     <!-- Room Strings -->
+     <string name="roominstruction">Please select a device that you want to connect.</string> 
+     <string name="onlinedevice">Online devices :</string> 
+    
+     
+     <!-- Working Strings --> 
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="Colon">:</string>
+    <string name="dualZero">00</string>
+    <string name="focus">Focus</string>
+    <string name="photo">Take photo</string>
+    <string name="video">Take video</string>
+    <string name="photoMode">Photo Mode</string>
+    <string name="videoMode">Video Mode</string>
+    
+    <!-- Setting Strings --> 
+    <string name="usage">This device will be used as :</string>
+    <string name="master">Master</string>
+    <string name="slave">Slave</string>
+
+</resources>

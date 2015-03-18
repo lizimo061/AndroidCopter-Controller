@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 这里用了帧布局 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <!-- 拍照用到了SurfaceView控件 -->
+	<SurfaceView  
+	    android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent" 
+	    android:id="@+id/myView"
+	    />
+    <!-- 用到了相对布局 -->
+    <RelativeLayout
+   		android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent" 
+	    android:visibility="visible"
+	    android:id="@+id/buttonlayout"
+    >
+    <!-- android:onClick="takepicture"指定点击后执行的方法，
+    android:layout_alignParentRight="true"指定在相对布局（也就是button按钮的父元素的右边）
+    android:layout_alignParentBottom="true"指定在相对布局（也就是button按钮的父元素的下边）
+    android:layout_marginRight="5dp"指的是右边距离相对布局（也就是button按钮的父元素为5个像素）
+    
+     -->
+    <!-- 拍照按钮 -->
+    	<Button
+    	android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentBottom="true"
+	    android:layout_marginRight="5dp"
+	    android:text="@string/photo"
+	    android:onClick="takepicture"
+	    android:id="@+id/takepicture"
+    	/>
+    	 <!-- android:layout_toLeftOf="@id/takepicture"指的是这个按钮在id为takepicture的组件的左边。
+    	  android:layout_alignTop="@id/takepicture"指的是这个按钮和id为takepicture的组件的顶部对其。
+    	  android:layout_marginRight="20dp"指的是这个按钮距离相对布局右边20个像素
+    	  -->
+    	<Button
+    	android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content" 
+	    android:layout_toLeftOf="@id/takepicture"
+	    android:layout_alignTop="@id/takepicture"
+	    android:layout_marginRight="20dp"
+	    android:text="@string/focus"
+	    android:onClick="takepicture"
+	    android:id="@+id/autofocus"
+    	/>    
+    </RelativeLayout>
+</FrameLayout>

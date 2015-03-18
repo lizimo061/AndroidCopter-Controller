@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_gravity="fill_horizontal"
+    android:orientation="horizontal"
+    android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@+id/ibFunc"
+            android:layout_alignTop="@+id/tbMode"
+            android:layout_toLeftOf="@+id/tbMode"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="My Title Bar"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ibFocus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ibPause"
+            android:layout_marginRight="44dp"
+            android:layout_toLeftOf="@+id/ibPause"
+            android:background="#000000"
+            android:src="@drawable/adjust" />
+
+        <ImageButton
+            android:id="@+id/ibPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="29dp"
+            android:layout_toLeftOf="@+id/ibFunc"
+            android:background="#000000"
+            android:src="@drawable/pause" 
+            android:visibility="invisible"
+            />
+
+        <ImageButton
+            android:id="@+id/ibFunc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/ibFocus"
+            android:background="#000000"
+            android:src="@drawable/photo"
+             />
+
+        <ToggleButton
+            android:id="@+id/tbMode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/ibFunc"
+            android:layout_alignTop="@+id/ibFunc"
+            android:layout_marginRight="60dp"
+            android:layout_toLeftOf="@+id/ibFocus"
+            android:checked="true"
+            android:text="ToggleButton"
+            android:textOff="Video Mode"
+            android:textOn="Camera Mode"
+            android:textStyle="bold" />
+  
+</RelativeLayout>

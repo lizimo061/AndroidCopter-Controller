@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+		<SurfaceView
+			android:id="@+id/svRemote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"  />
+
+
+        <RelativeLayout
+            android:id="@+id/rlLocal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@+id/layout_local"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true" >
+
+                <SurfaceView
+                    android:id="@+id/svLocal"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"  >
+                </SurfaceView>
+            
+        <!--       <ImageView
+                    android:id="@+id/ivSwitchCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@drawable/btn_switchvideo_background"
+                    android:src="@drawable/switchvideo"
+                    android:visibility="gone" />     Switch camera activity    -->
+            </FrameLayout>
+        </RelativeLayout>
+	</LinearLayout>
+	
+  	//JoystickDemo.Project Start
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    	<RelativeLayout
+    	    android:id="@+id/layout_joystick1"
+    	    android:layout_width="100dp"
+    	    android:layout_height="100dp"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_alignParentRight="true"
+    	    android:alpha="0.7"
+    	    android:background="@drawable/image_button_bg" >
+    	</RelativeLayout>
+
+    	<RelativeLayout
+    	    android:id="@+id/layout_joystick"
+    	    android:layout_width="100dp"
+    	    android:layout_height="100dp"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_alignParentLeft="true"
+    	    android:alpha="0.8"
+    	    android:background="@drawable/image_button_bg" >
+    	</RelativeLayout> 
+
+    	<ImageButton
+    	    android:id="@+id/settingButton"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="50dp"
+    	    android:layout_height="50dp"
+    	    android:layout_alignParentLeft="true"
+    	    android:layout_alignParentTop="true"
+    	    android:scaleType="fitCenter"
+    	    android:alpha="0.7"
+    	    android:src="@drawable/setting" />
+
+    	<ImageButton
+    	    android:id="@+id/flyButton"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_centerHorizontal="true"
+    	    android:alpha="0.7"
+    	    android:scaleType="fitCenter"
+    	    android:src="@drawable/takeoff" />
+    	
+    	<ImageButton
+    	    android:id="@+id/takePhotoButton"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignBottom="@+id/settingButton"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_alignParentRight="true"
+    	    android:alpha="0.7"
+    	    android:scaleType="fitCenter"
+    	    android:src="@drawable/takephoto" />
+
+    	<ImageButton
+    	    android:id="@+id/changeControllerButton"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignBottom="@+id/settingButton"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_alignRight="@+id/layout_joystick"
+    	    android:layout_toRightOf="@+id/settingButton"
+    	    android:alpha="0.7"
+    	    android:scaleType="fitCenter"
+    	    android:src="@drawable/changecontroller" />
+
+    	<TextView
+    	    android:id="@+id/textView1"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentRight="true"
+    	    android:layout_below="@+id/takePhotoButton"
+    	    android:text="Medium Text"
+    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+    	
+  //JoystickDemo.Project End
+    		
+    </RelativeLayout>
+    
+    <Chronometer
+        android:id="@+id/cmTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="30sp"
+        android:layout_y="30sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textView0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="2dp"
+        android:layout_y="50dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</AbsoluteLayout>

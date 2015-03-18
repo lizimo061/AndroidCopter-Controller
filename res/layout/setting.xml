@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+//[SELF]
+	
+	
+    
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:alpha="1"
+        android:gravity="center"
+        android:color="#66FF0000" >
+
+        
+
+        <TableRow
+            android:id="@+id/tableRow0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+           <TextView
+            android:id="@+id/initialHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Off Height"
+            android:textColorHint="#ff0000" />
+
+            <SeekBar
+                android:id="@+id/initialHeightSeekBar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            
+
+        </TableRow>
+
+         <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+             <TextView
+                 android:id="@+id/initialHeightTextView"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center|top"
+                 android:text="0"
+                 android:textAppearance="?android:attr/textAppearanceMedium" />
+              
+        </TableRow>
+            
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/rotationSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Max Rotation speed" />
+
+            <SeekBar
+                android:id="@+id/rotationSpeedSeekBar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            
+
+      <!--       <ToggleButton
+                android:id="@+id/rotationSpeedToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAFULT"
+                android:layout_gravity="center" /> --> 
+            
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/rotationSpeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center" />
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/horizontalSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Max Horizontal Velocity" />
+
+            <SeekBar
+                android:id="@+id/horizontalSpeedSeekBar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            
+
+       <!--       <ToggleButton
+                android:id="@+id/horizontalSpeedToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAFULT"
+                android:layout_gravity="center" /> -->
+            
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+            
+        <TextView
+                android:id="@+id/horizontalSpeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center" />
+        
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/verticalSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Max Vertical Speed" />
+
+            <SeekBar
+                android:id="@+id/verticalSpeedSeekBar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            
+
+       <!--       <ToggleButton
+                android:id="@+id/verticalSpeedToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAFULT"
+                android:layout_gravity="center" /> -->
+            
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+            
+        <TextView
+                android:id="@+id/verticalSpeedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center" />
+        
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/movingDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Safe Range" />
+
+            <SeekBar
+                android:id="@+id/movingDistanceSeekBar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+            
+
+       <!--       <ToggleButton
+                android:id="@+id/movingDistanceToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEAFULT"
+                android:layout_gravity="center" /> -->
+            
+        </TableRow>
+        
+        <TableRow
+            android:id="@+id/tableRow9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/movingDistanceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_gravity="center" />
+            
+        </TableRow>
+    </TableLayout>
+
+    <ImageButton
+        android:id="@+id/defaultSettingsButton"
+        android:layout_width="40dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/defaultsetting" />
+    
+</RelativeLayout>
