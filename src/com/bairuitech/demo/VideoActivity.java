@@ -55,12 +55,12 @@ import com.bairuitech.demo.JoyStickClass;
 
 public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatTextMsgEvent,AnyChatRecordEvent, OnClickListener {
 	//Top bar
-	private MenuItem miPhoto,miVideo;//The button in the pull down menu
+	//private MenuItem miPhoto,miVideo;//The button in the pull down menu
 	
 	//Layout and related variables
 	private RelativeLayout rlLocal; //The layout of remote view
 	private SurfaceView myView,otherView; //The view of local camera and remote camera
-	private ImageView mCameraSwitchImage; //The button that switch the front camera to back camera, or vice versa
+	 private ImageView mCameraSwitchImage; //The button that switch the front camera to back camera, or vice versa
 	LayoutParams para1=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0); //constant layout parameter
 	LayoutParams para2=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1.0f); //constant layout parameter
 	
@@ -542,18 +542,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	}  
 
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		Toast.makeText(getApplicationContext(), "VideoActivity onCreateOptionsMenu", Toast.LENGTH_SHORT).show();
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu, menu);
-		//stop=menu.findItem(R.id.action_stop);
-		miPhoto=menu.findItem(R.id.action_photo);
-		miVideo=menu.findItem(R.id.action_video);
-		miPhoto.setIcon(R.drawable.photo);
-		miVideo.setIcon(R.drawable.video);
-		return true;
-	}
+	
 
 	
    
@@ -613,6 +602,9 @@ private Button.OnClickListener btnOnClick = new Button.OnClickListener() {
 		// TODO Auto-generated method stub
 		Toast.makeText(getApplicationContext(), "VideoActivity controlChange", Toast.LENGTH_SHORT).show();
 		Intent intent_mode = new Intent();
+		intent_mode.setClass(VideoActivity.this, VideoMotionControlActivity.class);
+		startActivity(intent_mode);
+		
 		//intent_mode.setClass(, cls)
 	}
 

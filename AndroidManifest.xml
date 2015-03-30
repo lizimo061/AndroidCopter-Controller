@@ -79,6 +79,15 @@
             </intent-filter>
       </activity>
       
+      <activity android:name=".VideoMotionControlActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.NoTitleBar" >
+            <intent-filter>
+                <action android:name="com.bairuitech.demo.VideoMotionControlActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+      </activity>
+      
       <activity android:name=".VideoActivitySlave"
        android:screenOrientation="landscape"
        android:theme="@style/Theme.NoTitleBar" >
