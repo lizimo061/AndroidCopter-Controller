@@ -36,5 +36,6 @@
     <string name="usage">This device will be used as :</string>
     <string name="master">Master</string>
     <string name="slave">Slave</string>
+    <string name="desc">Brief description to increase the accessibility</string>
 
 </resources>

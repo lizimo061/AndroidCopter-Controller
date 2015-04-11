@@ -26,11 +26,7 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-            <FrameLayout
-                android:id="@+id/layout_local"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true" >
+          
 
                 <SurfaceView
                     android:id="@+id/svLocal"
@@ -47,11 +43,10 @@
                     android:background="@drawable/btn_switchvideo_background"
                     android:src="@drawable/switchvideo"
                     android:visibility="gone" />     Switch camera activity    -->
-            </FrameLayout>
         </RelativeLayout>
 	</LinearLayout>
 	
-  	//JoystickDemo.Project Start
+  	
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
@@ -63,6 +58,7 @@
     	    android:layout_height="100dp"
     	    android:layout_alignParentBottom="true"
     	    android:layout_alignParentRight="true"
+    	    android:layout_alignParentEnd="true"
     	    android:alpha="0.7"
     	    android:background="@drawable/image_button_bg" >
     	</RelativeLayout>
@@ -72,7 +68,6 @@
     	    android:layout_width="100dp"
     	    android:layout_height="100dp"
     	    android:layout_alignParentBottom="true"
-    	    android:layout_alignParentLeft="true"
     	    android:alpha="0.8"
     	    android:background="@drawable/image_button_bg" >
     	</RelativeLayout> 
@@ -83,10 +78,12 @@
     	    android:layout_width="50dp"
     	    android:layout_height="50dp"
     	    android:layout_alignParentLeft="true"
+    	    android:layout_alignParentStart="true"
     	    android:layout_alignParentTop="true"
     	    android:scaleType="fitCenter"
     	    android:alpha="0.7"
-    	    android:src="@drawable/setting" />
+    	    android:src="@drawable/setting" 
+    	    android:contentDescription="@string/desc"/>
 
     	<ImageButton
     	    android:id="@+id/flyButton"
@@ -97,7 +94,8 @@
     	    android:layout_centerHorizontal="true"
     	    android:alpha="0.7"
     	    android:scaleType="fitCenter"
-    	    android:src="@drawable/takeoff" />
+    	    android:src="@drawable/takeoff"
+    	    android:contentDescription="@string/desc" />
     	
     	<ImageButton
     	    android:id="@+id/takePhotoButton"
@@ -107,9 +105,11 @@
     	    android:layout_alignBottom="@+id/settingButton"
     	    android:layout_alignParentTop="true"
     	    android:layout_alignParentRight="true"
+    	    android:layout_alignParentEnd="true"
     	    android:alpha="0.7"
     	    android:scaleType="fitCenter"
-    	    android:src="@drawable/takephoto" />
+    	    android:src="@drawable/takephoto"
+    	    android:contentDescription="@string/desc" />
 
     	<ImageButton
     	    android:id="@+id/changeControllerButton"
@@ -119,21 +119,24 @@
     	    android:layout_alignBottom="@+id/settingButton"
     	    android:layout_alignParentTop="true"
     	    android:layout_alignRight="@+id/layout_joystick"
+    	    android:layout_alignEnd="@+id/layout_joystick"
     	    android:layout_toRightOf="@+id/settingButton"
+    	    android:layout_toEndOf="@+id/settingButton"
     	    android:alpha="0.7"
     	    android:scaleType="fitCenter"
-    	    android:src="@drawable/changecontroller" />
+    	    android:src="@drawable/changecontroller"
+    	    android:contentDescription="@string/desc" />
 
     	<TextView
     	    android:id="@+id/textView1"
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:layout_alignParentRight="true"
+    	    android:layout_alignParentEnd="true"
     	    android:layout_below="@+id/takePhotoButton"
     	    android:text="Medium Text"
     	    android:textAppearance="?android:attr/textAppearanceMedium" />
     	
-  //JoystickDemo.Project End
     		
     </RelativeLayout>
     

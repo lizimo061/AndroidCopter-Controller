@@ -60,7 +60,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	//Layout and related variables
 	private RelativeLayout rlLocal; //The layout of remote view
 	private SurfaceView myView,otherView; //The view of local camera and remote camera
-	 private ImageView mCameraSwitchImage; //The button that switch the front camera to back camera, or vice versa
+	//private ImageView mCameraSwitchImage; //The button that switch the front camera to back camera, or vice versa
 	LayoutParams para1=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0); //constant layout parameter
 	LayoutParams para2=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1.0f); //constant layout parameter
 	
@@ -401,9 +401,6 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		Toast.makeText(getApplicationContext(), "VideoActivity onResume", Toast.LENGTH_SHORT).show();
 		anychat.SetBaseEvent(this);
 		super.onResume();
-		//>JoystickDemo.Project3
-
-		//<JoystickDemo.Project3
 	}
 
 	protected void onPause() {
@@ -602,6 +599,7 @@ private Button.OnClickListener btnOnClick = new Button.OnClickListener() {
 		// TODO Auto-generated method stub
 		Toast.makeText(getApplicationContext(), "VideoActivity controlChange", Toast.LENGTH_SHORT).show();
 		Intent intent_mode = new Intent();
+		intent_mode.putExtra("UserID",userID);
 		intent_mode.setClass(VideoActivity.this, VideoMotionControlActivity.class);
 		startActivity(intent_mode);
 		
