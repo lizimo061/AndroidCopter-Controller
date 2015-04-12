@@ -86,7 +86,7 @@ public class ConfigService {
         editor.putInt("audioPlayDriver", configEntity.audioPlayDriver); 
         editor.putInt("audioRecordDriver", configEntity.audioRecordDriver);         
     	editor.commit();
-		Toast.makeText(context, "SaveConfig Loaded", Toast.LENGTH_LONG).show();
+		//Toast.makeText(context, "SaveConfig Loaded", Toast.LENGTH_LONG).show();
 	}
 	
 }

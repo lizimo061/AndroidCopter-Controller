@@ -56,20 +56,20 @@ import com.bairuitech.demo.JoyStickClass;
 public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatTextMsgEvent,AnyChatRecordEvent, OnClickListener {
 	//Top bar
 	//private MenuItem miPhoto,miVideo;//The button in the pull down menu
-	
+
 	//Layout and related variables
 	private RelativeLayout rlLocal; //The layout of remote view
 	private SurfaceView myView,otherView; //The view of local camera and remote camera
 	//private ImageView mCameraSwitchImage; //The button that switch the front camera to back camera, or vice versa
 	LayoutParams para1=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 0); //constant layout parameter
 	LayoutParams para2=new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1.0f); //constant layout parameter
-	
+
 	//Variables required by the Anychat
 	private ConfigEntity configEntity;
 	public AnyChatCoreSDK anychat;
 	int userID;
 	boolean bOnPaused = false;
-	
+
 	//send commands
 	//private MessageListView messageListView;
 	//private ArrayList<String> messageList = new ArrayList<String> ();
@@ -86,24 +86,24 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	private int dwRemoteVideoWidth = 0;*/
 
 	//recording video
-    private String VideoTodo;
-    Chronometer cm1;
-    long saveTime;
-    
-    
-    private Camera camera;
+	private String VideoTodo;
+	Chronometer cm1;
+	long saveTime;
 
-    //>JoystickDemo.Project1
-    JoyStickClass joyStick_L, joyStick_R;
+
+	private Camera camera;
+
+	//>JoystickDemo.Project1
+	JoyStickClass joyStick_L, joyStick_R;
 	RelativeLayout layoutJoyStick_L, layoutJoyStick_R;
 	ImageButton startSetting, startEngine, changeController, takePhoto;
 	boolean takeOff = false;
 	TextView directionText_L, directionText_R; //for test
-    //<JoystickDemo.Project1
+	//<JoystickDemo.Project1
 	@SuppressLint("HandlerLeak")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Toast.makeText(getApplicationContext(), "VideoActivity OnCreat", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity OnCreat", Toast.LENGTH_SHORT).show();
 		super.onCreate(savedInstanceState);
 		configEntity = ConfigService.LoadConfig(this);
 		Intent intent = getIntent();
@@ -113,7 +113,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		//>JoystickDemo.Project2
 		layoutJoyStick_L = (RelativeLayout) findViewById(R.id.layout_joystick);
 		layoutJoyStick_R = (RelativeLayout) findViewById(R.id.layout_joystick1);
-		
+
 		joyStick_L = new JoyStickClass(getApplicationContext(), layoutJoyStick_L, R.drawable.image_button);
 		joyStick_L.setStickSize(150, 150); //Inner Circle, unit?
 		joyStick_L.setLayoutSize(400, 400);//Outer Circle
@@ -121,7 +121,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		joyStick_L.setStickAlpha(100);
 		joyStick_L.setOffset(90); //Unknown
 		joyStick_L.setMinimumDistance(50);//Unknown
-		
+
 		joyStick_R = new JoyStickClass(getApplicationContext(), layoutJoyStick_R, R.drawable.image_button);
 		joyStick_R.setStickSize(150, 150);
 		joyStick_R.setLayoutSize(400, 400);
@@ -129,13 +129,13 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		joyStick_R.setStickAlpha(100);
 		joyStick_R.setOffset(90);
 		joyStick_R.setMinimumDistance(50);
-		
+
 		startSetting = (ImageButton) findViewById(R.id.settingButton);
 		startSetting.setTag(0);
 		startSetting.getBackground().setAlpha(0);
 		startSetting.setOnClickListener(btnOnClick);
-		
-	    startEngine = (ImageButton) findViewById(R.id.flyButton);
+
+		startEngine = (ImageButton) findViewById(R.id.flyButton);
 		startEngine.setTag(1);
 		startEngine.getBackground().setAlpha(0);
 		startEngine.setOnClickListener(btnOnClick);
@@ -144,116 +144,32 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		changeController.setTag(2);
 		changeController.getBackground().setAlpha(0);
 		changeController.setOnClickListener(btnOnClick);
-		
+
 		takePhoto = (ImageButton) findViewById(R.id.takePhotoButton);
 		takePhoto.setTag(3);
 		takePhoto.getBackground().setAlpha(0);
 		takePhoto.setOnClickListener(btnOnClick);
-		
+
 		directionText_L = (TextView) findViewById(R.id.textView0);
 		directionText_R = (TextView) findViewById(R.id.textView1);
-		
+
 		layoutJoyStick_L.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				joyStick_L.drawStick(arg1);
-			//	int direction = joyStick_L.get8Direction();
+				//	int direction = joyStick_L.get8Direction();
 				directionText_L.setText(Integer.toString(joyStick_L.getPositionX()));
 				directionText_R.setText(Integer.toString(joyStick_L.getPositionY()));//Display Joystick_L output
-			/*	if (arg1.getAction() == MotionEvent.ACTION_DOWN || arg1.getAction() == MotionEvent.ACTION_MOVE) {
-					// textView1.setText("X : " + String.valueOf(joyStick_L.getX()));
-					// textView2.setText("Y : " + String.valueOf(joyStick_L.getY()));
-					// textView3.setText("Angle : " + String.valueOf(joyStick_L.getAngle()));
-					// textView4.setText("Distance : " + String.valueOf(joyStick_L.getDistance()));
-					int direction = joyStick_L.get8Direction();
-					directionText_L.setText(Integer.toString(direction));
-					// if (direction == JoyStickClass_L.STICK_UP) {
-					// textView5.setText("Direction : Up");
-					// } else if (direction == JoyStickClass_L.STICK_UPRIGHT) {
-					// textView5.setText("Direction : Up Right");
-					// } else if (direction == JoyStickClass_L.STICK_RIGHT) {
-					// textView5.setText("Direction : Right");
-					// } else if (direction == JoyStickClass_L.STICK_DOWNRIGHT) {
-					// textView5.setText("Direction : Down Right");
-					// } else if (direction == JoyStickClass_L.STICK_DOWN) {
-					// textView5.setText("Direction : Down");
-					// } else if (direction == JoyStickClass_L.STICK_DOWNLEFT) {
-					// textView5.setText("Direction : Down Left");
-					// } else if (direction == JoyStickClass_L.STICK_LEFT) {
-					// textView5.setText("Direction : Left");
-					// } else if (direction == JoyStickClass_L.STICK_UPLEFT) {
-					// textView5.setText("Direction : Up Left");
-					// } else if (direction == JoyStickClass_L.STICK_NONE) {
-					// textView5.setText("Direction : Center");
-					// }
-				} else if (arg1.getAction() == MotionEvent.ACTION_UP) {
-					
-					// textView1.setText("X :");
-					// textView2.setText("Y :");
-					// textView3.setText("Angle :");
-					// textView4.setText("Distance :");
-					// textView5.setText("Direction :");
-				} */
 				return true;
 			}
 		});
 		layoutJoyStick_R.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				joyStick_R.drawStick(arg1);
-			//	int direction1 = joyStick_R.get8Direction();
-			//	directionText_R.setText(Integer.toString(direction1)); //Display Joystick_R output
-				/*if (arg1.getAction() == MotionEvent.ACTION_DOWN || arg1.getAction() == MotionEvent.ACTION_MOVE) {
-					// textView1.setText("X : " + String.valueOf(joyStick_L.getX()));
-					// textView2.setText("Y : " + String.valueOf(joyStick_L.getY()));
-					// textView3.setText("Angle : " + String.valueOf(joyStick_L.getAngle()));
-					// textView4.setText("Distance : " + String.valueOf(joyStick_L.getDistance()));
-
-					int direction1 = joyStick_R.get8Direction();
-					directionText_R.setText(Integer.toString(direction1));
-					// if (direction == JoyStickClass_L.STICK_UP) {
-					// textView5.setText("Direction : Up");
-					// } else if (direction == JoyStickClass_L.STICK_UPRIGHT) {
-					// textView5.setText("Direction : Up Right");
-					// } else if (direction == JoyStickClass_L.STICK_RIGHT) {
-					// textView5.setText("Direction : Right");
-					// } else if (direction == JoyStickClass_L.STICK_DOWNRIGHT) {
-					// textView5.setText("Direction : Down Right");
-					// } else if (direction == JoyStickClass_L.STICK_DOWN) {
-					// textView5.setText("Direction : Down");
-					// } else if (direction == JoyStickClass_L.STICK_DOWNLEFT) {
-					// textView5.setText("Direction : Down Left");
-					// } else if (direction == JoyStickClass_L.STICK_LEFT) {
-					// textView5.setText("Direction : Left");
-					// } else if (direction == JoyStickClass_L.STICK_UPLEFT) {
-					// textView5.setText("Direction : Up Left");
-					// } else if (direction == JoyStickClass_L.STICK_NONE) {
-					// textView5.setText("Direction : Center");
-					// }
-				} else if (arg1.getAction() == MotionEvent.ACTION_UP) {
-					// textView1.setText("X :");
-					// textView2.setText("Y :");
-					// textView3.setText("Angle :");
-					// textView4.setText("Distance :");
-					// textView5.setText("Direction :");
-				}           */
 				return true;
 			}
 		});
-	    //<JoystickDemo.Project2
-/*	startEngine.setOnClickListener(new OnClickListener(){
-		@Override
-		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			if(!takeOff){
-				startEngine.setImageResource(R.drawable.landing);
-				}
-			else{
-				startEngine.setImageResource(R.drawable.takeoff);
-				}
-			takeOff=!takeOff;
-			}		
-	    });		*/
 	} 
-	
+
 
 
 	private void InitialSDK() {
@@ -265,10 +181,10 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		anychat.mSensorHelper.InitSensor(this);
 		// 初始化Camera上下文句柄
 		AnyChatCoreSDK.mCameraHelper.SetContext(this);
-		
+
 		anychat.SetRecordSnapShotEvent(this);
 	}
-/*
+	/*
 	private void adjuestVideoSize(int width, int height) {
 
 		if (3 * width > 4 * height) {
@@ -288,18 +204,18 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	}*/
 
 	private void InitialLayout() {
-		Toast.makeText(getApplicationContext(), "VideoActivity InitialLayout", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity InitialLayout", Toast.LENGTH_SHORT).show();
 		this.setContentView(R.layout.video_room);
 		//startActivityForResult(new Intent("com.bairuitech.demo.VideoConfigActivity"), 1);
-		this.setTitle("Remote Controlling " + anychat.GetUserName(userID) + " now");
+		//this.setTitle("Remote Controlling " + anychat.GetUserName(userID) + " now");
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+
 		VideoTodo="Record";
 		myView = (SurfaceView) findViewById(R.id.svLocal);
 		otherView = (SurfaceView) findViewById(R.id.svRemote);
 		rlLocal=(RelativeLayout)findViewById(R.id.rlLocal);
 		cm1=(Chronometer)findViewById(R.id.cmTimer);
-		
+
 		if(configEntity.usage==ConfigEntity.Master){
 			otherView.setLayoutParams(para1);
 			rlLocal.setLayoutParams(para2);
@@ -307,20 +223,20 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 			rlLocal.setLayoutParams(para1);
 			otherView.setLayoutParams(para2);
 		}
-		
+
 		// 如果是采用Java视频采集，则需要设置Surface的CallBack
 		if(AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) {
 			myView.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);			
 		}
-		
+
 		// 如果是采用Java视频显示，则需要设置Surface的CallBack
 		if(AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {
 			int index = anychat.mVideoHelper.bindVideo(otherView.getHolder());
 			anychat.mVideoHelper.SetVideoUser(index, userID);
 		}
-	
+
 		otherView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			
+
 			@Override
 			public void onGlobalLayout() {
 				// TODO Auto-generated method stub
@@ -342,7 +258,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		if (configEntity.videoOverlay != 0) {
 			myView.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		}
-		
+
 		// 判断是否显示本地摄像头切换图标
 		/*if(AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) {
 			if(AnyChatCoreSDK.mCameraHelper.GetCameraNumber() > 1) {
@@ -369,13 +285,13 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		// 打开本地音频、视频设备	
 		anychat.UserCameraControl(-1, 1);
 		anychat.UserSpeakControl(-1, 1);		
-		
-		
+
+
 	}
 
 
 	private void refreshAV() {
-		Toast.makeText(getApplicationContext(), "VideoActivity refreshAV", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity refreshAV", Toast.LENGTH_SHORT).show();
 		anychat.UserCameraControl(userID, 1);
 		anychat.UserSpeakControl(userID, 1);
 		anychat.UserCameraControl(-1, 1);
@@ -392,7 +308,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 			int index = anychat.mVideoHelper.bindVideo(otherView.getHolder());
 			anychat.mVideoHelper.SetVideoUser(index, userID);
 		}
-		
+
 		refreshAV();
 		bOnPaused = false;
 	}
@@ -414,10 +330,10 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	}
 
 	protected void onDestroy() {
-		Toast.makeText(getApplicationContext(), "VideoActivity onDestroy", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity onDestroy", Toast.LENGTH_SHORT).show();
 		super.onDestroy();
 		Log.e("******RoomActivity***********", "RoomActivity  onDestroy");	
-	 	anychat.LeaveRoom(-1);
+		anychat.LeaveRoom(-1);
 		anychat.mSensorHelper.DestroySensor();
 		finish();
 	}
@@ -425,13 +341,13 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	@Override
 	public void OnAnyChatConnectMessage(boolean bSuccess) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "VideoActivity OnAnyChatConnectMessage", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity OnAnyChatConnectMessage", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void OnAnyChatEnterRoomMessage(int dwRoomId, int dwErrorCode) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "VideoActivity OnAnychatEnterRoomMessage", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity OnAnychatEnterRoomMessage", Toast.LENGTH_SHORT).show();
 		Log.e("********VideoActivity*********", "OnAnyChatEnterRoomMessage");
 
 	}
@@ -493,7 +409,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		// TODO Auto-generated method stub
 		/*
 		if (v == mCameraSwitchImage) {
-			
+
 			// 如果是采用Java视频采集，则在Java层进行摄像头切换
 			if(AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) {
 				AnyChatCoreSDK.mCameraHelper.SwitchCamera();
@@ -501,7 +417,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 			}
 
 			String strVideoCaptures[] = anychat.EnumVideoCapture();
-			
+
 			String temp = anychat.GetCurVideoCapture();
 			for (int i = 0; i < strVideoCaptures.length; i++) {
 				if (!temp.equals(strVideoCaptures[i])) {
@@ -515,13 +431,13 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 
 		}*/
 	}
-	
-	
+
+
 	@Override
 	public void OnAnyChatTextMessage(int dwFromUserid, int dwToUserid,
 			boolean bSecret, String message) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "VideoActivity OnAnyChatTextMessage", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity OnAnyChatTextMessage", Toast.LENGTH_SHORT).show();
 		//messageList.add(anychat.GetUserName(dwFromUserid)+"说: "+message);
 		/*if(configEntity.usage==ConfigEntity.Slave){
 			Toast.makeText(this, message,Toast.LENGTH_SHORT).show();	
@@ -538,92 +454,95 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		}*/
 	}  
 
-	
-	
 
-	
-   
-    //send commands
+
+
+
+
+	//send commands
 	private void SendMessage(String command){
 		Toast.makeText(getApplicationContext(), "VideoActivity SendMessage", Toast.LENGTH_SHORT).show();
 		if(configEntity.usage==ConfigEntity.Master)
 			anychat.SendTextMessage(-1, 0, command);
-    }
-	
-	
-@Override
-public void OnAnyChatRecordEvent(int dwUserId, String lpFileName, int dwElapse,
-		int dwFlags, int dwParam, String lpUserStr) {
-	// TODO Auto-generated method stub
-	//Toast.makeText(getApplicationContext(), "VideoActivity RecordEvent", Toast.LENGTH_SHORT).show();
-}
+	}
 
-
-@Override
-public void OnAnyChatSnapShotEvent(int dwUserId, String lpFileName,
-		int dwFlags, int dwParam, String lpUserStr) {
-	// TODO Auto-generated method stub
-	//Toast.makeText(getApplicationContext(), "VideoActivity OnAnyChatSnapShotEvent", Toast.LENGTH_SHORT).show();
-}
-
-//>JoystickDemo.Project5
-private Button.OnClickListener btnOnClick = new Button.OnClickListener() {
 
 	@Override
-	public void onClick(View v) {
+	public void OnAnyChatRecordEvent(int dwUserId, String lpFileName, int dwElapse,
+			int dwFlags, int dwParam, String lpUserStr) {
 		// TODO Auto-generated method stub
-		switch ((Integer) v.getTag()) {
-		case 0:
-			startSetting();
-			break;
-		case 1:
-			startEngine();
-			if(!takeOff){
-				startEngine.setImageResource(R.drawable.landing);
+		//Toast.makeText(getApplicationContext(), "VideoActivity RecordEvent", Toast.LENGTH_SHORT).show();
+	}
+
+
+	@Override
+	public void OnAnyChatSnapShotEvent(int dwUserId, String lpFileName,
+			int dwFlags, int dwParam, String lpUserStr) {
+		// TODO Auto-generated method stub
+		//Toast.makeText(getApplicationContext(), "VideoActivity OnAnyChatSnapShotEvent", Toast.LENGTH_SHORT).show();
+	}
+
+	//>JoystickDemo.Project5
+	private Button.OnClickListener btnOnClick = new Button.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			switch ((Integer) v.getTag()) {
+			case 0:
+				startSetting();
+				break;
+			case 1:
+				startEngine();
+				if(!takeOff){
+					startEngine.setImageResource(R.drawable.landing);
 				}
-			else{
-				startEngine.setImageResource(R.drawable.takeoff);
+				else{
+					startEngine.setImageResource(R.drawable.takeoff);
 				}
-			takeOff=!takeOff;
-			break;
-		case 2:
-			changeControlMode();
-			break;
-		case 3:
-			anychat.SnapShot(userID, 1, 1);
-			break;
+				takeOff=!takeOff;
+				break;
+			case 2:
+				changeControlMode();
+				break;
+			case 3:
+				anychat.SnapShot(userID, 1, 1);
+				break;
+			}
+		} 
+
+		private void changeControlMode() {
+			// TODO Auto-generated method stub
+			Toast.makeText(getApplicationContext(), "VideoActivity controlChange", Toast.LENGTH_SHORT).show();
+			Intent intent_mode = new Intent();
+			
+			AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(myView.getHolder());
+			AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(otherView.getHolder());
+			
+			intent_mode.putExtra("UserID",userID);
+			intent_mode.setClass(VideoActivity.this, VideoMotionControlActivity.class);
+			startActivity(intent_mode);
+			
 		}
-	} 
 
-	private void changeControlMode() {
-		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "VideoActivity controlChange", Toast.LENGTH_SHORT).show();
-		Intent intent_mode = new Intent();
-		intent_mode.putExtra("UserID",userID);
-		intent_mode.setClass(VideoActivity.this, VideoMotionControlActivity.class);
-		startActivity(intent_mode);
-		
-		//intent_mode.setClass(, cls)
-	}
+		private void startSetting() {
+			// TODO Auto-generated method stub
+			//Toast.makeText(getApplicationContext(), "VideoActivity startSetting", Toast.LENGTH_SHORT).show();
+			//>JoystickDemo.Project4
+			Intent intent_setting=new Intent();
+			intent_setting.setClass(VideoActivity.this, SettingActivity.class);
+			startActivity(intent_setting);
+			//<JoystickDemo.Project4
+		}
 
-	private void startSetting() {
-		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "VideoActivity startSetting", Toast.LENGTH_SHORT).show();
-		//>JoystickDemo.Project4
-		Intent intent_setting=new Intent();
-	    intent_setting.setClass(VideoActivity.this, SettingActivity.class);
-	    startActivity(intent_setting);
-		//<JoystickDemo.Project4
-	}
+		private void startEngine() {
+			// TODO Auto-generated method stub
+			//Toast.makeText(getApplicationContext(), "L21", Toast.LENGTH_LONG).show();
+		}	
 
-	private void startEngine() {
-		// TODO Auto-generated method stub
-		//Toast.makeText(getApplicationContext(), "L21", Toast.LENGTH_LONG).show();
-	}	
-	
-	
-};
-//<JoystickDemo.Project5
+
+	};
+
 
 }
 
