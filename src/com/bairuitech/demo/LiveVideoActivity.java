@@ -148,7 +148,7 @@ public class LiveVideoActivity extends Activity implements AnyChatBaseEvent{
     
     private void InitialSDK()
     {
-    	Toast.makeText(getApplicationContext(), "M2", Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(getApplicationContext(), "M2", Toast.LENGTH_SHORT).show();
         anychat = new AnyChatCoreSDK();
         anychat.SetBaseEvent(this);
         

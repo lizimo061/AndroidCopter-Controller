@@ -226,7 +226,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 
 		// 如果是采用Java视频采集，则需要设置Surface的CallBack
 		if(AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) {
-			myView.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);			
+			myView.getHolder().addCallback(AnyChatCoreSDK.mCameraHelper);	
 		}
 
 		// 如果是采用Java视频显示，则需要设置Surface的CallBack
@@ -302,7 +302,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 
 	protected void onRestart() {
 		super.onRestart();
-		Toast.makeText(getApplicationContext(), "VideoActivity onRestart", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity onRestart", Toast.LENGTH_SHORT).show();
 		// 如果是采用Java视频显示，则需要设置Surface的CallBack
 		if(AnyChatCoreSDK.GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {
 			int index = anychat.mVideoHelper.bindVideo(otherView.getHolder());
@@ -314,19 +314,24 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	}
 
 	protected void onResume() {
-		Toast.makeText(getApplicationContext(), "VideoActivity onResume", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity onResume", Toast.LENGTH_SHORT).show();
+		Log.e("********VideoActivity********","onResume");
 		anychat.SetBaseEvent(this);
 		super.onResume();
 	}
 
 	protected void onPause() {
-		Toast.makeText(getApplicationContext(), "VideoActivity onPause", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getApplicationContext(), "VideoActivity onPause", Toast.LENGTH_SHORT).show();
 		super.onPause();
 		bOnPaused = true;
 		anychat.UserCameraControl(userID, 0);
 		anychat.UserSpeakControl(userID, 0);
 		anychat.UserCameraControl(-1, 0);
 		anychat.UserSpeakControl(-1, 0);
+		
+		AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(myView.getHolder());
+		AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(otherView.getHolder());
+		
 	}
 
 	protected void onDestroy() {
