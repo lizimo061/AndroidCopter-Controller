@@ -27,6 +27,8 @@
             android:layout_height="match_parent"
             android:gravity="center" >
 
+ 
+
            <TextView
             android:id="@+id/initialHeight"
             android:layout_width="wrap_content"
@@ -251,6 +253,17 @@
         android:layout_height="37dp"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/defaultsetting" />
+        android:src="@drawable/refresh" />
+
+       <ImageButton
+           android:id="@+id/controller"
+           android:layout_width="40dp"
+           android:layout_height="wrap_content"
+           android:layout_alignBottom="@+id/defaultSettingsButton"
+           android:layout_alignParentTop="true"
+           android:layout_toEndOf="@+id/defaultSettingsButton"
+           android:layout_toRightOf="@+id/defaultSettingsButton"
+           android:scaleType="fitXY"
+           android:src="@drawable/changecontroller" />
     
 </RelativeLayout>

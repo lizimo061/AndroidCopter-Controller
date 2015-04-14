@@ -101,6 +101,7 @@ public class AnyChatCameraHelper implements SurfaceHolder.Callback{
 					mCamera.addCallbackBuffer(data);
 				}
 			});
+			
 			mCamera.startPreview(); // 打开预览画面
 			bIfPreview = true;
 
@@ -130,6 +131,7 @@ public class AnyChatCameraHelper implements SurfaceHolder.Callback{
 	// 摄像头采集控制
 	public void CaptureControl(boolean bCapture) {
 		bNeedCapture = bCapture;
+		
 		if(bNeedCapture && mVideoPixfmt != -1)
 		{
 			try {
@@ -143,16 +145,20 @@ public class AnyChatCameraHelper implements SurfaceHolder.Callback{
 		} else {
 			AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_CORESDK_EXTVIDEOINPUT, 0);
 		}
+		//Log.e("**Camera","Testing1");
+		//Here ends;
 	}
 
 	// 获取系统中摄像头的数量
 	public int GetCameraNumber() {
+	
 		try {
 			return Camera.getNumberOfCameras();
 		} catch (Exception ex) {
 			return 0;
 		}
 	}
+		
 	// 自动对焦
 	public void CameraAutoFocus() {
 		if(mCamera == null || !bIfPreview)
@@ -238,6 +244,7 @@ public class AnyChatCameraHelper implements SurfaceHolder.Callback{
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
+		Log.e("Camera","SurfaceCreated");
 		try {
 			mCamera = Camera.open(iCurrentCameraId);
 			currentHolder = holder;
@@ -268,6 +275,7 @@ public class AnyChatCameraHelper implements SurfaceHolder.Callback{
 		}
 		currentHolder = null;
 		mVideoPixfmt = -1;
+		Log.e("Camera","Surface Destroyed");
 	}
 
 	private int getDeviceOrientation() {

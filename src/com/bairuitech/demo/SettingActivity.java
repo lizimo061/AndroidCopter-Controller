@@ -1,6 +1,7 @@
 package com.bairuitech.demo; //[SELF]:S
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +19,12 @@ import android.widget.ToggleButton;
 
 public class SettingActivity extends Activity implements OnSeekBarChangeListener{
 
-	ImageButton defaultSettings;
+	ImageButton defaultSettings,changeControlMode;
 	TextView initialHeight, initialHeightTextView, rotationSpeed, rotationSpeedTextView, horizontalSpeed, horizontalSpeedTextView, verticalSpeed, verticalSpeedTextView, movingDistance, movingDistanceTextView;
 	SeekBar initialHeightSeekBar, rotationSpeedSeekBar, horizontalSpeedSeekBar, verticalSpeedSeekBar, movingDistanceSeekBar;
 //	ToggleButton initialHeightToggleButton, rotationSpeedToggleButton, horizontalSpeedToggleButton, verticalSpeedToggleButton, movingDistanceToggleButton;
 	int initialHeightMagnitude, rotationSpeedMagnitude, horizontalSpeedMagnitude, verticalSpeedMagnitude, movingDistanceMagnitude;
+	int userID;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,9 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
         
-
+        Intent intent = getIntent();
+		userID = intent.getIntExtra("UserID", -1);
+        
         
         TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         TableRow tableRow = new TableRow(this);
@@ -69,74 +73,11 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
         defaultSettings.setOnClickListener(defaultButtonOnClick);
         defaultSettings.getBackground().setAlpha(0);
         
-        //<UROP1000.project
+        changeControlMode = (ImageButton) findViewById(R.id.controller);
+        changeControlMode.setOnClickListener(controllerButtonOnClick);
+        changeControlMode.getBackground().setAlpha(0);
         
-        //>http://developer.android.com/guide/topics/ui/controls/togglebutton.html
-        /*     initialHeightToggleButton = (ToggleButton) findViewById(R.id.initialHeightToggleButton);
-        initialHeightToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                	Toast.makeText(getApplicationContext(), "S2.0", Toast.LENGTH_SHORT).show();
-                } else {
-                    // The toggle is disabled
-                	Toast.makeText(getApplicationContext(), "S3.0", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        
-        rotationSpeedToggleButton = (ToggleButton) findViewById(R.id.rotationSpeedToggleButton);
-        rotationSpeedToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                	Toast.makeText(getApplicationContext(), "S2.1", Toast.LENGTH_SHORT).show();
-                } else {
-                    // The toggle is disabled
-                	Toast.makeText(getApplicationContext(), "S3.1", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        
-  //      horizontalSpeedToggleButton = (ToggleButton) findViewById(R.id.horizontalSpeedToggleButton);
-        horizontalSpeedToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                	Toast.makeText(getApplicationContext(), "S2.2", Toast.LENGTH_SHORT).show();
-                } else {
-                    // The toggle is disabled
-                	Toast.makeText(getApplicationContext(), "S3.2", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        
-  //      verticalSpeedToggleButton = (ToggleButton) findViewById(R.id.verticalSpeedToggleButton);
-  //      verticalSpeedToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                	Toast.makeText(getApplicationContext(), "S2.3", Toast.LENGTH_SHORT).show();
-                } else {
-                    // The toggle is disabled
-                	Toast.makeText(getApplicationContext(), "S3.3", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        
-  //      movingDistanceToggleButton = (ToggleButton) findViewById(R.id.movingDistanceToggleButton);
-        movingDistanceToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                	Toast.makeText(getApplicationContext(), "S2.4", Toast.LENGTH_SHORT).show();
-                } else {
-                    // The toggle is disabled
-                	Toast.makeText(getApplicationContext(), "S3.4", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });	*/
-        //<http://developer.android.com/guide/topics/ui/controls/togglebutton.html
+       
     }
 
     //>UROP1000.project1
@@ -239,6 +180,19 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
 			movingDistanceSeekBar.setProgress(movingDistanceSeekBar.getMax()/2);
 			horizontalSpeedSeekBar.setProgress(horizontalSpeedSeekBar.getMax()/2);
 		}
+	};
+	
+	private ImageButton.OnClickListener controllerButtonOnClick = new ImageButton.OnClickListener(){
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent intent_mode = new Intent();
+			intent_mode.putExtra("UserID",userID);			
+			intent_mode.setClass(SettingActivity.this, VideoMotionControlActivity.class);
+			startActivity(intent_mode);
+		}
+		
 	};
     
     protected void onResume() {

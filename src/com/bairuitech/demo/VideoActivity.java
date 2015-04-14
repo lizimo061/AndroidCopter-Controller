@@ -96,7 +96,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	//>JoystickDemo.Project1
 	JoyStickClass joyStick_L, joyStick_R;
 	RelativeLayout layoutJoyStick_L, layoutJoyStick_R;
-	ImageButton startSetting, startEngine, changeController, takePhoto;
+	ImageButton startSetting, startEngine, takePhoto;
 	boolean takeOff = false;
 	TextView directionText_L, directionText_R; //for test
 	//<JoystickDemo.Project1
@@ -140,13 +140,9 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		startEngine.getBackground().setAlpha(0);
 		startEngine.setOnClickListener(btnOnClick);
 
-		changeController = (ImageButton) findViewById(R.id.changeControllerButton);
-		changeController.setTag(2);
-		changeController.getBackground().setAlpha(0);
-		changeController.setOnClickListener(btnOnClick);
 
 		takePhoto = (ImageButton) findViewById(R.id.takePhotoButton);
-		takePhoto.setTag(3);
+		takePhoto.setTag(2);
 		takePhoto.getBackground().setAlpha(0);
 		takePhoto.setOnClickListener(btnOnClick);
 
@@ -329,15 +325,14 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 		anychat.UserCameraControl(-1, 0);
 		anychat.UserSpeakControl(-1, 0);
 		
-		AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(myView.getHolder());
-		AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(otherView.getHolder());
+		
 		
 	}
 
 	protected void onDestroy() {
 		//Toast.makeText(getApplicationContext(), "VideoActivity onDestroy", Toast.LENGTH_SHORT).show();
 		super.onDestroy();
-		Log.e("******RoomActivity***********", "RoomActivity  onDestroy");	
+		Log.e("******VideoActivity***********", "VideoActivity  onDestroy");	
 		anychat.LeaveRoom(-1);
 		anychat.mSensorHelper.DestroySensor();
 		finish();
@@ -507,42 +502,25 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 				}
 				takeOff=!takeOff;
 				break;
+
 			case 2:
-				changeControlMode();
-				break;
-			case 3:
 				anychat.SnapShot(userID, 1, 1);
 				break;
 			}
 		} 
 
-		private void changeControlMode() {
-			// TODO Auto-generated method stub
-			Toast.makeText(getApplicationContext(), "VideoActivity controlChange", Toast.LENGTH_SHORT).show();
-			Intent intent_mode = new Intent();
-			
-			AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(myView.getHolder());
-			AnyChatCoreSDK.mCameraHelper.surfaceDestroyed(otherView.getHolder());
-			
-			intent_mode.putExtra("UserID",userID);
-			intent_mode.setClass(VideoActivity.this, VideoMotionControlActivity.class);
-			startActivity(intent_mode);
-			
-		}
+
 
 		private void startSetting() {
 			// TODO Auto-generated method stub
-			//Toast.makeText(getApplicationContext(), "VideoActivity startSetting", Toast.LENGTH_SHORT).show();
-			//>JoystickDemo.Project4
 			Intent intent_setting=new Intent();
+			intent_setting.putExtra("UserID", userID);
 			intent_setting.setClass(VideoActivity.this, SettingActivity.class);
 			startActivity(intent_setting);
-			//<JoystickDemo.Project4
 		}
 
 		private void startEngine() {
 			// TODO Auto-generated method stub
-			//Toast.makeText(getApplicationContext(), "L21", Toast.LENGTH_LONG).show();
 		}	
 
 

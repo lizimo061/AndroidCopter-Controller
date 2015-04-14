@@ -263,6 +263,6 @@ public class AnyChatAudioHelper {
 			}
 			Log.d(TAG, "audio record stop....");
 		}
-
+		
 	}
 }
