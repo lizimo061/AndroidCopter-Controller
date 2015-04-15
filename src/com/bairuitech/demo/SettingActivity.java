@@ -25,6 +25,7 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
 //	ToggleButton initialHeightToggleButton, rotationSpeedToggleButton, horizontalSpeedToggleButton, verticalSpeedToggleButton, movingDistanceToggleButton;
 	int initialHeightMagnitude, rotationSpeedMagnitude, horizontalSpeedMagnitude, verticalSpeedMagnitude, movingDistanceMagnitude;
 	int userID;
+	int controlMode;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
         
         Intent intent = getIntent();
 		userID = intent.getIntExtra("UserID", -1);
+		controlMode = intent.getIntExtra("ModeID", 0);
         
         
         TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout);
@@ -77,7 +79,11 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
         changeControlMode.setOnClickListener(controllerButtonOnClick);
         changeControlMode.getBackground().setAlpha(0);
         
-       
+        verticalSpeedSeekBar.setProgress(verticalSpeedSeekBar.getMax()/2);
+		initialHeightSeekBar.setProgress(initialHeightSeekBar.getMax()/2);
+		rotationSpeedSeekBar.setProgress(rotationSpeedSeekBar.getMax()/2);
+		movingDistanceSeekBar.setProgress(movingDistanceSeekBar.getMax()/2);
+		horizontalSpeedSeekBar.setProgress(horizontalSpeedSeekBar.getMax()/2);
     }
 
     //>UROP1000.project1
@@ -188,11 +194,16 @@ public class SettingActivity extends Activity implements OnSeekBarChangeListener
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent_mode = new Intent();
-			intent_mode.putExtra("UserID",userID);			
-			intent_mode.setClass(SettingActivity.this, VideoMotionControlActivity.class);
-			startActivity(intent_mode);
+			intent_mode.putExtra("UserID",userID);	
+			if(controlMode == 0){
+				intent_mode.setClass(SettingActivity.this, VideoMotionControlActivity.class);				
+				startActivity(intent_mode);
+			}
+			else if(controlMode == 1){
+				intent_mode.setClass(SettingActivity.this, VideoActivity.class);				
+				startActivity(intent_mode);
+			}
 		}
-		
 	};
     
     protected void onResume() {

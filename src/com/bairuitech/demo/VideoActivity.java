@@ -68,6 +68,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 	private ConfigEntity configEntity;
 	public AnyChatCoreSDK anychat;
 	int userID;
+	int controlMode=0;
 	boolean bOnPaused = false;
 
 	//send commands
@@ -515,6 +516,7 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent,AnyChatT
 			// TODO Auto-generated method stub
 			Intent intent_setting=new Intent();
 			intent_setting.putExtra("UserID", userID);
+			intent_setting.putExtra("ModeID", controlMode);
 			intent_setting.setClass(VideoActivity.this, SettingActivity.class);
 			startActivity(intent_setting);
 		}
